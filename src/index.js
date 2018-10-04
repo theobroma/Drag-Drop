@@ -14,7 +14,6 @@ class App extends React.Component {
   state = initialData;
 
   onDragEnd = result => {
-    console.log (result);
     const {destination, source, draggableId} = result;
 
     if (!destination) {
@@ -28,7 +27,7 @@ class App extends React.Component {
     }
 
     const start = this.state.columns[source.droppableId];
-    const finish = this.state.columns[destination.draggableId];
+    const finish = this.state.columns[destination.droppableId];
 
     if (start === finish) {
       const newTaskIds = Array.from (start.taskIds);
@@ -50,6 +49,31 @@ class App extends React.Component {
       this.setState (newState);
       return;
     }
+    //Moving from one list to another
+    const startTaskIds = Array.from (start.taskIds);
+
+    startTaskIds.splice (source.index, 1);
+    const newStart = {
+      ...start,
+      taskIds: startTaskIds,
+    };
+
+    const finishTaskIds = Array.from (finish.taskIds);
+    finishTaskIds.splice (destination.index, 0, draggableId);
+    const newFinish = {
+      ...finish,
+      taskIds: finishTaskIds,
+    };
+
+    const newState = {
+      ...this.state,
+      columns: {
+        ...this.state.columns,
+        [newStart.id]: newStart,
+        [newFinish.id]: newFinish,
+      },
+    };
+    this.setState (newState);
   };
 
   render () {
