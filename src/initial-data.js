@@ -5,6 +5,7 @@ const data = {
     'task-3': {id: 'task-3', content: 'Charge my phone'},
     'task-4': {id: 'task-4', content: 'Cook dinner'},
     'task-5': {id: 'task-5', content: 'Task5'},
+    'task-6': {id: 'task-6', content: 'Task6'},
   },
   columns: {
     'column-1': {
@@ -14,11 +15,16 @@ const data = {
     },
     'column-2': {
       id: 'column-2',
-      title: 'Done',
+      title: 'In progress',
       taskIds: ['task-5'],
     },
+    'column-3': {
+      id: 'column-3',
+      title: 'Done',
+      taskIds: ['task-6'],
+    },
   },
-  columnOrder: ['column-1', 'column-2'],
+  columnOrder: ['column-1', 'column-2', 'column-3'],
 };
 
 export default data;
